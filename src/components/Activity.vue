@@ -1,10 +1,10 @@
 <template>
   <div>
     <div> You may want to ... </div>
-    <div> {{data.activity}} </div>
-    <div> {{data.type}} </div>
-    <div> {{translatePrice()}} </div>
-    <div> {{data.participants}} </div>
+    <div> activité : {{data.activity}} </div>
+    <div> type : {{data.type}} </div>
+    <div> prix : {{translatePrice()}} </div>
+    <div> nombre de participant(s) : {{data.participants}} </div>
   </div>
 </template>
 <script>

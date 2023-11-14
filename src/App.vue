@@ -1,7 +1,8 @@
 <template>
   <div style="text-align: left">
-      <button @click="getDataFromAPI">Request</button>
-    <activity v-if="this.data" :data="this.data"></activity>
+      <criteria @sentCriteria="getDataFromAPI"></criteria>
+    <activity v-if="this.data && !this.data.error" :data="this.data"></activity>
+    <label v-if="this.data && this.data.error"> Aucune activité trouvé pour ces paramètres</label>
   </div>
 </template>
 
@@ -9,11 +10,13 @@
 
 import axios from "axios";
 import Activity from "./components/Activity.vue";
+import Criteria from "./components/Criteria.vue";
 
 export default {
   name: 'App',
   components: {
-    Activity
+    Activity,
+    Criteria
   },
   data () {
     return {
@@ -21,11 +24,17 @@ export default {
     }
   },
   methods : {
-    getDataFromAPI(){
-      axios
-          .get('https://www.boredapi.com/api/activity')
-          .then(response => {this.data = response.data
-            console.log(this.data)})
+    getDataFromAPI(criteria){
+      console.log(criteria)
+      if (criteria.minprice <= criteria.maxprice){
+        axios
+            .get('https://www.boredapi.com/api/activity', {params : criteria})
+            .then(response => {this.data = response.data; console.log(this.data)})
+
+      }
+      else{
+        alert("Prix min superieur au prix max !");
+      }
     }
   }
 }
