@@ -1,6 +1,6 @@
 <template>
   <div style="text-align: left">
-    TODO
+    <button @click="getDataFromAPI">DO</button>
   </div>
 </template>
 
@@ -9,7 +9,20 @@
 import axios from "axios";
 
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+      data: null
+    }
+  },
+  methods : {
+    getDataFromAPI(){
+      axios
+          .get('https://www.boredapi.com/api/activity')
+          .then(response => {this.data = response
+            console.log(this.data)})
+    }
+  }
 }
 </script>
 
