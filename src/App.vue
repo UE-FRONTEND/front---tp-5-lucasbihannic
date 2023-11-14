@@ -25,12 +25,10 @@ export default {
   },
   methods : {
     getDataFromAPI(criteria){
-      console.log(criteria)
       if (criteria.minprice <= criteria.maxprice){
         axios
             .get('https://www.boredapi.com/api/activity', {params : criteria})
-            .then(response => {this.data = response.data; console.log(this.data)})
-
+            .then(response => {this.data = response.data})
       }
       else{
         alert("Prix min superieur au prix max !");
